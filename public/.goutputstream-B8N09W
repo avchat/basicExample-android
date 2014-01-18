@@ -1,0 +1,6 @@
+<html>
+<head>
+<script type="text/javascript">
+function updateHtml(){
+	 document.getElementById("content").innerHTML =   
+         "
