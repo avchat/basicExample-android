@@ -65,11 +65,12 @@ window.onload = function () {
 
       room.addEventListener("stream-subscribed", function(streamEvent) {
         var stream = streamEvent.stream;
-        var div = document.createElement('div');
+        /*var div = document.createElement('div');
         div.setAttribute("style", "width: 320px; height: 240px;");
         div.setAttribute("id", "test" + stream.getID());
 
-        document.body.appendChild(div);
+        document.body.appendChild(div);*/
+		app_js2java.create_view(320, 240, "test" + stream.getID());
         stream.show("test" + stream.getID());
 
       });
@@ -84,8 +85,9 @@ window.onload = function () {
         // Remove stream from DOM
         var stream = streamEvent.stream;
         if (stream.elementID !== undefined) {
-          var element = document.getElementById(stream.elementID);
-          document.body.removeChild(element);
+          //var element = document.getElementById(stream.elementID);
+          //document.body.removeChild(element);
+			app_js2java.remove_view("test" + stream.getID());
         }
       });
 
