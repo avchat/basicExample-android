@@ -70,7 +70,7 @@ window.onload = function () {
         div.setAttribute("id", "test" + stream.getID());
 
         document.body.appendChild(div);*/
-		app_js2java.create_view(320, 240, "test" + stream.getID());
+        viewManager.create_view(320, 240, "test" + stream.getID());
         stream.show("test" + stream.getID());
 
       });
@@ -87,7 +87,7 @@ window.onload = function () {
         if (stream.elementID !== undefined) {
           //var element = document.getElementById(stream.elementID);
           //document.body.removeChild(element);
-			app_js2java.remove_view("test" + stream.getID());
+        	viewManager.remove_view("test" + stream.getID());
         }
       });
 
