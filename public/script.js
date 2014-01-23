@@ -70,7 +70,8 @@ window.onload = function () {
         div.setAttribute("id", "test" + stream.getID());
 
         document.body.appendChild(div);*/
-        pcManagerProxy.new_view(320, 240, "test" + stream.getID());
+        var param = {width:320,height:240,view_id:"test" + stream.getID()};
+        pcManagerJS.call_method(PCManagerJS.method_map['new_view'], this.pc_id, param);
         stream.show("test" + stream.getID());
 
       });
@@ -87,7 +88,8 @@ window.onload = function () {
         if (stream.elementID !== undefined) {
           //var element = document.getElementById(stream.elementID);
           //document.body.removeChild(element);
-        	pcManagerProxy.delete_view("test" + stream.getID());
+        	var param = {view_id:"test" + stream.getID()};
+        	pcManagerJS.call_method(PCManagerJS.method_map['delete_view'], this.pc_id, param);
         }
       });
 
