@@ -71,7 +71,7 @@ window.onload = function () {
 
         document.body.appendChild(div);*/
         var param = {width:320,height:240,view_id:"test" + stream.getID()};
-        pcManagerJS.call_method(PCManagerJS.method_map['new_view'], this.pc_id, param);
+        pcManagerJS.call_method(PCManagerJS.method_map['view_new'], "0", param);
         stream.show("test" + stream.getID());
 
       });
@@ -89,7 +89,7 @@ window.onload = function () {
           //var element = document.getElementById(stream.elementID);
           //document.body.removeChild(element);
         	var param = {view_id:"test" + stream.getID()};
-        	pcManagerJS.call_method(PCManagerJS.method_map['delete_view'], this.pc_id, param);
+        	pcManagerJS.call_method(PCManagerJS.method_map['view_delete'], "0", param);
         }
       });
 
