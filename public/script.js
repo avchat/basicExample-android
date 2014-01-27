@@ -24,7 +24,8 @@ window.onload = function () {
   recording = false;
   var screen = getParameterByName("screen");
 
-  localStream = Erizo.Stream({audio: true, video: true, data: true, screen: screen, videoSize: [640, 480, 640, 480]});
+  //localStream = Erizo.Stream({audio: true, video: true, data: true, screen: screen, videoSize: [640, 480, 640, 480]});
+  localStream = Erizo.Stream({audio: true, video: true, data: false, screen: screen, videoSize: [640, 480, 640, 480]});
   var createToken = function(userName, role, callback) {
 
     var req = new XMLHttpRequest();
