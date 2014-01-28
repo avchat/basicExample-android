@@ -94,9 +94,12 @@ window.onload = function () {
         }
       });
 
+      console.log("room.connect");
       room.connect();
-
-      localStream.show("myVideo");
+	
+	console.log("localStream.show");
+var param = {width:320,height:240,view_id:"myVideo"};
+        pcManagerJS.call_method('view_new', "0", param);
 
     });
     localStream.init();
