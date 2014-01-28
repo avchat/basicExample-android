@@ -72,7 +72,7 @@ window.onload = function () {
 
         document.body.appendChild(div);*/
         var param = {width:320,height:240,view_id:"test" + stream.getID()};
-        pcManagerJS.call_method(PCManagerJS.method_map['view_new'], "0", param);
+        pcManagerJS.call_method('view_new', "0", param);
         stream.show("test" + stream.getID());
 
       });
@@ -90,18 +90,39 @@ window.onload = function () {
           //var element = document.getElementById(stream.elementID);
           //document.body.removeChild(element);
         	var param = {view_id:"test" + stream.getID()};
-        	pcManagerJS.call_method(PCManagerJS.method_map['view_delete'], "0", param);
+        	pcManagerJS.call_method('view_delete', "0", param);
         }
       });
 
       console.log("room.connect");
       room.connect();
 	
-	console.log("localStream.show");
-var param = {width:320,height:240,view_id:"myVideo"};
+		console.log("localStream.show");
+		var param = {width:320,height:240,view_id:"myVideo"};
         pcManagerJS.call_method('view_new', "0", param);
 
     });
     localStream.init();
+	var param = {width:320,height:240,view_id:"myVideox"};
+/*var player = new Erizo.VideoPlayer({id: "myPlayerx", elementID: "myVideox"});*/
+	pcManagerJS.call_method('view_new', "0", param);
+	pcManagerJS.call_method('player_new', "0", {'play_id':'myPlayerx','view_id':'myVideox','stream_type':'local'});
+
+var param1 = {width:320,height:240,view_id:"myVideox1"};
+/*var player = new Erizo.VideoPlayer({id: "myPlayerx", elementID: "myVideox"});*/
+	pcManagerJS.call_method('view_new', "0", param1);
+	pcManagerJS.call_method('player_new', "0", {'play_id':'myPlayerx1','view_id':'myVideox1','stream_type':'local'});
+
+
+var param2 = {width:320,height:240,view_id:"myVideox2"};
+/*var player = new Erizo.VideoPlayer({id: "myPlayerx", elementID: "myVideox"});*/
+	pcManagerJS.call_method('view_new', "0", param2);
+	pcManagerJS.call_method('player_new', "0", {'play_id':'myPlayerx2','view_id':'myVideox2','stream_type':'local'});
+
+var param3 = {width:320,height:240,view_id:"myVideox3"};
+/*var player = new Erizo.VideoPlayer({id: "myPlayerx", elementID: "myVideox"});*/
+	pcManagerJS.call_method('view_new', "0", param3);
+	pcManagerJS.call_method('player_new', "0", {'play_id':'myPlayerx3','view_id':'myVideox3','stream_type':'local'});
+
   });
 };
