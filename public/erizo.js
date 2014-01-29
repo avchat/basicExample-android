@@ -6638,30 +6638,36 @@ PCManagerJS.prototype.pc_new = function(pc, pc_config, con) {
 
 PCManagerJS.prototype.call_method = function(method_name, pc_id, param_obj) {
 	// pcManagerProxy是由android调用webview时注入的PCManager实例的代理对象
-	console.log(JSON.stringify(param_obj));
+	//console.log(JSON.stringify(param_str));
 	pcManagerProxy.call_method(method_name, pc_id, JSON.stringify(param_obj));
 };
 
 PCManagerJS.prototype.cb_method = function(method_name, pc_id, param_str) {
-	console.log("PCManagerJS.prototype.cb_method");
-	console.log(typeof(param_obj));	
-	var param_obj = JSON.parse(param_str);
+	console.log("****PCManagerJS.prototype.cb_method -> "+method_name+"****");
+	//console.log(typeof(param_obj));
+	var param_s = param_str;
+	var param_str1 = param_s.replace(/\r\n/g, "\\r\\n");
+	console.log(param_str1);	
+	var param_obj = JSON.parse(param_str1);
 	
 	switch(method_name) {
 	case 'cb_createOffer':
 		// 根据传来的json对象，创造RTCSessionDescription
-		var sd = new RTCSessionDescription();
-		sd.type = param_obj.type;
-		sd.sdp = param_obj.sdp;
+		
+		//var param_test = JSON.parse(str);
+		var sd = new RTCSessionDescription(param_obj);
+		//sd.sdp = param_obj.sdp;
+		//sd.type = param_obj.type;
+		
 		
 		// 调用pc的createOffer的回调函数
 		PCManagerJS.pc_map[pc_id].cb_createOffer(sd);
 		break;
 	case 'cb_createAnswer':
 		// 根据传来的json对象，创造RTCSessionDescription
-		var sd = new RTCSessionDescription();
-		sd.type = param_obj.type;
-		sd.sdp = param_obj.sdp;
+		var sd = new RTCSessionDescription(param_obj);
+		//sd.type = param_obj.type;
+		//sd.sdp = param_obj.sdp;
 		
 		// 调用pc的createAnswer的回调函数
 		PCManagerJS.pc_map[pc_id].cb_createAnswer(sd);
@@ -6685,7 +6691,9 @@ L.Logger.info("cb_method -> cb_getUserMedia!");
 		PCManagerJS.pc_map[pc_id].signalingState = state;
 		
 		// 并产生回调
-		PCManagerJS.pc_map[pc_id].onSignalingChange(state);
+		if(PCManagerJS.pc_map[pc_id].onSignalingChange) {
+			PCManagerJS.pc_map[pc_id].onSignalingChange(state);
+		}
 		break;
 	case 'onIceConnectionChange':
 		// 根据传来的json对象，创造state
@@ -6695,7 +6703,9 @@ L.Logger.info("cb_method -> cb_getUserMedia!");
 		PCManagerJS.pc_map[pc_id].iceConnectionState = state;
 		
 		// 并产生回调
-		PCManagerJS.pc_map[pc_id].oniceconnectionchange(state);
+		if(PCManagerJS.pc_map[pc_id].oniceconnectionchange) {
+			PCManagerJS.pc_map[pc_id].oniceconnectionchange(state);
+		}
 		break;
 	case 'onIceGatheringChange':
 		// 根据传来的json对象，创造state
@@ -6705,15 +6715,17 @@ L.Logger.info("cb_method -> cb_getUserMedia!");
 		PCManagerJS.pc_map[pc_id].iceGatheringState = state;
 		
 		// 并产生回调
-		PCManagerJS.pc_map[pc_id].onicegatheringchange(state);
+		if(PCManagerJS.pc_map[pc_id].onicegatheringchange) {
+			PCManagerJS.pc_map[pc_id].onicegatheringchange(state);
+		}
 		break;
 	case 'onIceCandidate':
 		// 根据传来的JSON对象，创造evt对象
 		var evt = {};
 		var ice = {};
-		ice.sdpMLineIndex = candidate.sdpMLineIndex;
-		ice.sdpMid = candidate.sdpMid;
-		ice.sdp = candidate.sdp;
+		ice.sdpMLineIndex = param_obj.sdpMLineIndex;
+		ice.sdpMid = param_obj.sdpMid;
+		ice.sdp = param_obj.sdp;
 		evt.candidate = ice;
 		
 		// 产生回调
