@@ -25,7 +25,7 @@ window.onload = function () {
   var screen = getParameterByName("screen");
 
   //localStream = Erizo.Stream({audio: true, video: true, data: true, screen: screen, videoSize: [640, 480, 640, 480]});
-  localStream = Erizo.Stream({audio: true, video: true, data: false, screen: screen, videoSize: [640, 480, 640, 480]});
+  localStream = Erizo.Stream({streamID:'localid', audio: true, video: true, data: false, screen: screen, videoSize: [640, 480, 640, 480]});
   var createToken = function(userName, role, callback) {
 
     var req = new XMLHttpRequest();
@@ -62,7 +62,11 @@ window.onload = function () {
       room.addEventListener("room-connected", function (roomEvent) {
 
         room.publish(localStream, {maxVideoBW: 300});
+
         subscribeToStreams(roomEvent.streams);
+
+//console.log("localStream.show");		
+//		localStream.show("myVideo");
       });
 
       room.addEventListener("stream-subscribed", function(streamEvent) {
@@ -98,11 +102,14 @@ window.onload = function () {
       console.log("room.connect");
       room.connect();
 	
-		console.log("localStream.show");
-		var param = {width:320,height:240,view_id:"myVideo"};
-        pcManagerJS.call_method('view_new', "0", param);
+
+		
 
     });
+
+var param = {width:320,height:240,view_id:"myVideo"};
+        pcManagerJS.call_method('view_new', "0", param);
+
     localStream.init();
 	console.log("********************");
 
