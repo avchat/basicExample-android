@@ -49,6 +49,7 @@ window.onload = function () {
     room = Erizo.Room({token: token});
 
     localStream.addEventListener("access-accepted", function () {
+	console.log("my access-accepted");
       var subscribeToStreams = function (streams) {
         for (var index in streams) {
           var stream = streams[index];
@@ -103,26 +104,7 @@ window.onload = function () {
 
     });
     localStream.init();
-	var param = {width:320,height:240,view_id:"myVideox"};
-/*var player = new Erizo.VideoPlayer({id: "myPlayerx", elementID: "myVideox"});*/
-	pcManagerJS.call_method('view_new', "0", param);
-	pcManagerJS.call_method('player_new', "0", {'play_id':'myPlayerx','view_id':'myVideox','stream_type':'local'});
-
-var param1 = {width:320,height:240,view_id:"myVideox1"};
-/*var player = new Erizo.VideoPlayer({id: "myPlayerx", elementID: "myVideox"});*/
-	pcManagerJS.call_method('view_new', "0", param1);
-	pcManagerJS.call_method('player_new', "0", {'play_id':'myPlayerx1','view_id':'myVideox1','stream_type':'local'});
-
-
-var param2 = {width:320,height:240,view_id:"myVideox2"};
-/*var player = new Erizo.VideoPlayer({id: "myPlayerx", elementID: "myVideox"});*/
-	pcManagerJS.call_method('view_new', "0", param2);
-	pcManagerJS.call_method('player_new', "0", {'play_id':'myPlayerx2','view_id':'myVideox2','stream_type':'local'});
-
-var param3 = {width:320,height:240,view_id:"myVideox3"};
-/*var player = new Erizo.VideoPlayer({id: "myPlayerx", elementID: "myVideox"});*/
-	pcManagerJS.call_method('view_new', "0", param3);
-	pcManagerJS.call_method('player_new', "0", {'play_id':'myPlayerx3','view_id':'myVideox3','stream_type':'local'});
+	console.log("********************");
 
   });
 };
